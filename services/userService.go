@@ -38,7 +38,8 @@ func (s *UserService) CreateUser(ctx context.Context, req *pb.CreateUserRequest)
 
 func (s *UserService) GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUserResponse, error) {
 	var user map[string]interface{}
-	resp := s.Db.Table("users").Where("id = ?", req.Id).First(&user)
+	fmt.Println(req.Id)
+	resp := s.Db.Table("users").Where("id = ?", req.Id).Take(&user)
 	if resp.Error != nil {
 		return nil, resp.Error
 	}
